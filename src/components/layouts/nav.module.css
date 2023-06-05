@@ -1,0 +1,62 @@
+.drawer {
+  background-color: #2A2A2C;
+  height: 100%;
+}
+
+.drawer a {
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.drawer i {
+  font-size: 25px;
+  margin-right: 10px;
+  color: #c9c9c9;
+}
+
+.drawer p {
+  padding: 0;
+  margin: 0;
+  color: #c9c9c9;
+  transition: 0.2s;
+}
+
+.drawer p:hover {
+  transform: scale(1.2);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search input {
+  width: 0;
+  transition: 1s;
+  margin-right: 5px;
+}
+
+.search input:hover {
+  width: 150px;
+}
+
+.search i {
+  margin-right: 50px;
+}
+
+.apps_right {
+  display: flex;
+}
+
+.apps_right button {
+  color: #ffffff;
+}
+
+.apps_right a {
+  text-decoration: none;
+  margin-top: .5em;
+  margin-left: 1em;
+  font-weight: bolder;
+  color: #ffffff;
+}
+
