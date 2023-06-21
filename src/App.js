@@ -11,6 +11,8 @@ import Message from './components/layouts/Message';
 import { SnackbarProvider } from 'notistack';
 import CartContextProvider from "./context/CartContext";
 import Cart from "./components/layouts/Cart";
+import TechService from "./components/pages/techService/TechService";
+import CashSales from "./components/pages/vendas/CashSales";
 
 function App() {
   return (
@@ -26,7 +28,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/products" element={<Products />} />
-                
+                <Route path="/techservice" element={<TechService />} />
+                <Route path="/cashsales" element={<CashSales />} />
                 <Route path="/users" element={<Nav />} />
               </Routes>
             </Main>

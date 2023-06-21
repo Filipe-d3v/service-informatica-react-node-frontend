@@ -16,7 +16,6 @@ export default function useAuth() {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`
       setAuthenticated(true)
     }
-    console.log(token)
   }, [])
 
   async function getUser() {
@@ -43,7 +42,7 @@ export default function useAuth() {
 
   async function authUser(data) {
     setAuthenticated(true)
-    localStorage.getItem('token', JSON.stringify(data.token))
+    localStorage.setItem('token', JSON.stringify(data.token))
     navigate('/')
   }
 

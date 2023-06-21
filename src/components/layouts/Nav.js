@@ -10,7 +10,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { IoMenu, IoHomeSharp, IoInformationCircle, IoList, IoStatsChart, IoBuild } from 'react-icons/io5'
+import { IoMenu, IoHomeSharp, IoInformationCircle, IoList, 
+IoStatsChart, IoBuild } from 'react-icons/io5'
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/UserContext'
 import { styled, alpha } from '@mui/material/styles';
@@ -70,7 +71,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Nav(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { authenticated, logout, getUser } = useContext(Context)
+  const { authenticated, logout } = useContext(Context)
   const [anchorEl, setAnchorEl] = useState(null);
   const { productsToCart } = useContext(CartContext)
 
@@ -145,7 +146,7 @@ export default function Nav(props) {
                 </ListItem>
               </Link>
               <Divider sx={{ backgroundColor: '#e2e2e2' }} />
-              <Link to='/technicalservices'>
+              <Link to='/techservice'>
                 <ListItem disablePadding >
                   <ListItemButton>
                     <i><IoBuild /></i>
@@ -292,7 +293,7 @@ export default function Nav(props) {
         </Box>
       </Box>
 
-
+ 
     </>
   )
 }

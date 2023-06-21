@@ -1,41 +1,75 @@
-import { React, useContext, useState } from 'react';
+import { React, useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../context/CartContext';
 import Styles from './cart.module.css'
-import { Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import api from '../../utils/api';
-import { useSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack';
+import { formatBalance } from '../../utils/utils';
+
 
 export default function Cart() {
-  const { productsToCart, addProductToCart, removeToCart, calcTotal } = useContext(CartContext);
-  const [cashSale, setCashSale] = useState({});
+  const { productsToCart, addProductToCart, removeToCart, total } = useContext(CartContext);
+
   const { enqueueSnackbar } = useSnackbar();
   const [token] = useState(localStorage.getItem('token') || '');
-  const [formOfPay, setFormaOfPay] = useState('');
+  const [cashSale, setCashSale] = useState({});
+  const [products, setProducts] = useState('')
 
-  let total = calcTotal();
 
-  async function createCashSale(sale) {
+
+  function handleChangeTypePayment(e) {
+    setCashSale({ ...cashSale, type_payment: e.target.value })
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log('cashSale', cashSale)
     try {
-      await api.post('/cashsales/create', {}, {
+      await api.post('/cashsales/create', cashSale, {
         Authorization: `Bearer ${JSON.parse(token)}`,
         'Content-Type': 'multipart/form-data',
+      }).then((response) => {
+        enqueueSnackbar(response.data.message, { variant: 'success' })
+        return response.data
       })
-        .then((response) => {
-          enqueueSnackbar(response.data.message, { variant: 'success' })
-          return response.data;
-        })
+
     } catch (error) {
       enqueueSnackbar(error.response.data.message, { variant: 'error' })
     }
   }
-  function handleChange(e) {
-    setFormaOfPay( e.target.value )
-  }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    createCashSale(cashSale)
-  }
+  useEffect(() => {
+    let newProducts = "";
+
+    productsToCart.map((product) => (
+      newProducts += ` ${product.qty}, ${product.name}`
+    ))
+    setProducts(newProducts)
+    setCashSale({ ...cashSale, products: newProducts })
+  }, [productsToCart]);
+
+
+
+  useEffect(() => {
+    setCashSale({ ...cashSale, total: total })
+  }, [total]);
+
+
+  useEffect(() => {
+
+    let newProducts = "";
+
+    productsToCart.map((product) => (
+      newProducts += ` ${product.qty}, ${product.name}`
+    ))
+    setProducts(newProducts)
+
+    setCashSale({ type_payment: '', products: newProducts, total: total })
+
+
+  }, [])
+
+
 
   return (
     <>
@@ -76,30 +110,32 @@ export default function Cart() {
 
         ))}
         <div className={Styles.payment}>
-          <p>Total: {total.toFixed(2)}</p>
-          <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
-            <InputLabel id="demo-simple-select-label" variant='standard'>Forma de pagamento</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={formOfPay}
-              onChange={handleChange}
-              label="pagamento"
-
-            >
-              <MenuItem value={"Dinheiro"}>Dinheiro</MenuItem>
-              <MenuItem value={"Pix"}>Pix</MenuItem>
-              <MenuItem value={"Cartão de crédito"}>Cartão de crédito</MenuItem>
-              <MenuItem value={"Cartão de débito"}>Cartão de débito</MenuItem>
-              <MenuItem value={"Transferência bancária"}>Transferência bancária</MenuItem>
-            </Select>
-
-            <Button variant='contained' color='success' style={{ height: '35px', marginTop: '1em' }}
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+            <TextField
+              label="Total"
+              name='total'
+              value={formatBalance(total)}
+            />
+            <TextField
+              type="text"
+              name='products'
+              value={products}
+            />
+            <TextField
+              type='text'
+              label='Forma de pagamento'
+              name='type_payment'
+              value={cashSale.type_payment}
+              onChange={handleChangeTypePayment}
+            />
+            <Button
+              type='contained'
+              color='primary'
               onClick={handleSubmit}
             >
-              <h4>VENDER</h4>
+              Finalizar venda
             </Button>
-          </FormControl>
+          </form>
 
         </div>
       </div>

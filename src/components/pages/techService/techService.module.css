@@ -1,0 +1,71 @@
+.formulario {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  visibility: hidden;
+}
+
+.view_create {
+  height: 0px;
+  transition: 0.8s;
+  background-color: aliceblue;
+}
+
+.techServ {
+  border: solid 1px #787878;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 15px 10px ;
+  box-shadow: 0px 4px 11px -6px #000000;
+}
+
+.info_client h4,
+h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.info_client p{
+  padding: 0;
+  margin: 0;
+}
+
+.desc h4,
+h5 {
+  padding: 0;
+  margin: 0;
+}
+
+.info_client{
+  border-right: solid 1px #c9c9c9;
+  margin-right: 5px;
+  width: 20%;
+}
+
+.desc {
+  border-right: solid 1px #c9c9c9;
+  width: 60%;
+  margin-right: 5px;
+  padding-right: 5px;
+}
+
+.status{
+  text-align: center;
+  width: 20%;
+}
+
+.status h3{
+  padding: 0;
+  margin: 0;
+}
+
+.info_client h4{
+  color: rgb(60, 147, 147);
+  text-decoration: underline;
+}
+
+.info_client h5{
+  font-weight: 100;
+}
