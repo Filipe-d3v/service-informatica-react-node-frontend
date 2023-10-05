@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import styles from './techService.module.css';
 import api from "../../../utils/api";
 import { useSnackbar } from "notistack";
-import { Button, Divider, TextField } from "@mui/material";
+import { Button, Divider} from "@mui/material";
+import { ButtonStyled, TextFieldStyled } from "./styleds";
 
 export default function TechService() {
   const { enqueueSnackbar } = useSnackbar();
   const [techServ, setTechServ] = useState({});
   const [token] = useState(localStorage.getItem('token') || '');
-  const [techServices, setTechServices] = useState([] || '')
+  const [techServices, setTechServices] = useState([] || '');
 
 
   const handleChange = (e) => {
@@ -34,19 +35,23 @@ export default function TechService() {
   function viewForm() {
     document.getElementById('formView').style.height = '100%';
     document.getElementById('inputs').style.visibility = 'visible';
-    document.getElementById('formView').style.transition = '0.8s';
   }
   function hiddenForm() {
     document.getElementById('formView').style.height = '0px';
-    document.getElementById('inputs').style.visibility = 'hidden';
-    document.getElementById('inputs').style.transition = '0.8s';
+    document.getElementById('inputs').style.visibility = 'hidden';;
   }
 
   useEffect(() => {
-    api.get('/techServices').then((response) => {
+    api.get('/techservices', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    }).then((response) => {
       setTechServices(response.data.techServices)
     })
-  }, [])
+  }, [token])
+
+  console.log(techServices.status)
 
   return (
     <>
@@ -66,7 +71,7 @@ export default function TechService() {
       </div>
       <div id="formView" className={styles.view_create}>
         <form id="inputs" onSubmit={handleSubmit} className={styles.formulario}>
-          <TextField
+          <TextFieldStyled
             type="text"
             name="clientName"
             label="Nome do Cliente"
@@ -74,7 +79,7 @@ export default function TechService() {
             value={techServ.clientName}
             onChange={handleChange}
           />
-          <TextField
+          <TextFieldStyled
             type="tel"
             name="clientPhone"
             label="Telefone do Cliente"
@@ -82,7 +87,7 @@ export default function TechService() {
             value={techServ.clientPhone}
             onChange={handleChange}
           />
-          <TextField
+          <TextFieldStyled
             type="text"
             name="clientAdress"
             label="Endereço do Cliente"
@@ -90,7 +95,7 @@ export default function TechService() {
             value={techServ.clientAdress}
             onChange={handleChange}
           />
-          <TextField
+          <TextFieldStyled
             type="text"
             name="description"
             label="Descrição do problema"
@@ -98,7 +103,7 @@ export default function TechService() {
             value={techServ.description}
             onChange={handleChange}
           />
-          <TextField
+          <TextFieldStyled
             type="text"
             name="status"
             label="Status"
@@ -106,18 +111,24 @@ export default function TechService() {
             value={techServ.status}
             onChange={handleChange}
           />
-          <Button
+          <div className={styles.buttons}>
+          <ButtonStyled
           variant="contained"
           color="success"
-          onClick={handleSubmit}>
+          onClick={handleSubmit}
+          
+          >
           Salvar
-        </Button>
-        <Button
+        </ButtonStyled>
+        <ButtonStyled
           variant="contained"
           color="error"
-          onClick={hiddenForm}>
+          onClick={hiddenForm}
+          sx={{right: 0}}
+          >
           Ccancelar
-        </Button>
+        </ButtonStyled>
+          </div>
         </form>
         
       </div>
@@ -137,7 +148,10 @@ export default function TechService() {
               <p>{techService.description}</p>
             </div>
             <div className={styles.status}>
-              <h3>{techService.status}</h3>
+              <h3>{}
+                 
+                 
+              </h3>
             </div>
           </div>
         ))}

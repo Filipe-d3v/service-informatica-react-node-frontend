@@ -10,63 +10,18 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { IoMenu, IoHomeSharp, IoInformationCircle, IoList, 
+import { IoMenu, IoHomeSharp, IoList, 
 IoStatsChart, IoBuild } from 'react-icons/io5'
 import { Link } from 'react-router-dom';
-import { Context } from '../../context/UserContext'
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import { Context } from '../../context/UserContext';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { IoCart } from 'react-icons/io5'
 import Styles from './nav.module.css'
 import { Menu, MenuItem, Badge } from '@mui/material';
 import { CartContext } from '../../context/CartContext';
+import Logo from '../../assets/logo.jpg';
 
 const drawerWidth = 200;
-
-///Componente de pesquisa
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
 
 export default function Nav(props) {
   const { window } = props;
@@ -108,7 +63,7 @@ export default function Nav(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <i><IoHomeSharp /></i>
-              <p>Home</p>
+              <p>HOME</p>
             </ListItemButton>
           </ListItem>
         </Link>
@@ -117,31 +72,22 @@ export default function Nav(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <i><IoList /></i>
-              <p>Produtos</p>
+              <p>PRODUTOS</p>
             </ListItemButton>
           </ListItem>
         </Link>
         <Divider sx={{ backgroundColor: '#e2e2e2' }} />
-        <Link to='/products'>
-          <ListItem disablePadding >
-            <ListItemButton>
-              <i><IoInformationCircle /></i>
-              <p>Sobre</p>
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Divider sx={{ backgroundColor: '#e2e2e2' }} />
+
       </List>
       <List>
         {authenticated ?
           (
             <>
-              <Divider sx={{ backgroundColor: '#e2e2e2' }} />
               <Link to='/cashsales'>
                 <ListItem disablePadding >
                   <ListItemButton>
                     <i><IoStatsChart /></i>
-                    <p>Vendas</p>
+                    <p>VENDAS</p>
                   </ListItemButton>
                 </ListItem>
               </Link>
@@ -150,7 +96,7 @@ export default function Nav(props) {
                 <ListItem disablePadding >
                   <ListItemButton>
                     <i><IoBuild /></i>
-                    <p>Manutenção</p>
+                    <p>SERVIÇOS</p>
                   </ListItemButton>
                 </ListItem>
               </Link>
@@ -187,21 +133,9 @@ export default function Nav(props) {
             >
               <IoMenu />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Service Informática
-            </Typography>
+            <img src={Logo} alt='Service Informática Logo' />
             <div className={Styles.apps_right}>
-              <div className={Styles.search}>
-                <Search>
-                  <SearchIconWrapper>
-                    <SearchIcon />
-                  </SearchIconWrapper>
-                  <StyledInputBase
-                    placeholder="Buscar..."
-                    inputProps={{ 'aria-label': 'search' }}
-                  />
-                </Search>
-              </div>
+
               {authenticated ? (
                 <>
                   <div>

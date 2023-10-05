@@ -24,7 +24,7 @@ function App() {
             <Message />
             <Main>
               <Routes>
-              <Route path="/cart" element={<Cart />} />
+                <Route path="/cart" element={<Cart />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/products" element={<Products />} />

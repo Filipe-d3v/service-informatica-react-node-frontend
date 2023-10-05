@@ -1,5 +1,5 @@
 .drawer {
-  background-color: #2A2A2C;
+  background-color: #b6b6b6;
   height: 100%;
 }
 
@@ -11,13 +11,13 @@
 .drawer i {
   font-size: 25px;
   margin-right: 10px;
-  color: #c9c9c9;
+  color: #1A1A1A;
 }
 
 .drawer p {
   padding: 0;
   margin: 0;
-  color: #c9c9c9;
+  color: #1A1A1A;
   transition: 0.2s;
 }
 
@@ -28,6 +28,7 @@
 .toolbar {
   display: flex;
   justify-content: space-between;
+  background-color: #1A1A1A;
 }
 
 .search input {
@@ -58,5 +59,9 @@
   margin-left: 1em;
   font-weight: bolder;
   color: #ffffff;
+}
+
+img {
+  height : 55px;
 }
 

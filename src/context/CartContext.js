@@ -38,14 +38,6 @@ const CartContextProvider = ({ children }) => {
     setproductsToCart([]);
   };
 
-  const calcTotal = () => {
-    const total = productsToCart.reduce((i, product) => {
-
-      return i + product.price * product.qty;
-    }, 0);
-    return total;
-  }
-
   useEffect(() => {
     setTotal(productsToCart.reduce((i, product) => {
       return i + product.price * product.qty;

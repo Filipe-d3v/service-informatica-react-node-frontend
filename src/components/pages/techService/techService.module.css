@@ -69,3 +69,7 @@ h5 {
 .info_client h5{
   font-weight: 100;
 }
+
+.buttons {
+  width: 100%;
+}

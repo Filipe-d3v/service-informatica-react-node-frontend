@@ -8,7 +8,7 @@ import { formatBalance } from '../../utils/utils';
 
 
 export default function Cart() {
-  const { productsToCart, addProductToCart, removeToCart, total } = useContext(CartContext);
+  const { productsToCart, addProductToCart, removeToCart, clearCart, total } = useContext(CartContext);
 
   const { enqueueSnackbar } = useSnackbar();
   const [token] = useState(localStorage.getItem('token') || '');
@@ -42,9 +42,9 @@ export default function Cart() {
     let newProducts = "";
 
     productsToCart.map((product) => (
-      newProducts += ` ${product.qty}, ${product.name}`
-    ))
-    setProducts(newProducts)
+      newProducts += ` ${product.qty} ${product.name}`
+    ));
+    setProducts(newProducts);
     setCashSale({ ...cashSale, products: newProducts })
   }, [productsToCart]);
 
@@ -56,20 +56,13 @@ export default function Cart() {
 
 
   useEffect(() => {
-
     let newProducts = "";
-
     productsToCart.map((product) => (
       newProducts += ` ${product.qty}, ${product.name}`
     ))
     setProducts(newProducts)
-
     setCashSale({ type_payment: '', products: newProducts, total: total })
-
-
   }, [])
-
-
 
   return (
     <>
@@ -130,7 +123,7 @@ export default function Cart() {
             />
             <Button
               type='contained'
-              color='primary'
+              color='success'
               onClick={handleSubmit}
             >
               Finalizar venda
@@ -138,6 +131,16 @@ export default function Cart() {
           </form>
 
         </div>
+
+        <Button
+              variant='contained'
+              size='small'
+              onClick={clearCart}
+              fullWidth={true}
+              color='warning'
+            >
+              Limpar carrinho
+            </Button>
       </div>
     </>
   )

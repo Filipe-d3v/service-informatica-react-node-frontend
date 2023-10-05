@@ -1,3 +1,5 @@
+import React from "react";
+import FabWhats from "../../layouts/FabWhats";
 
 export default function Home() {
   

@@ -25,6 +25,16 @@
   text-align: center;
 }
 
+.fab{
+  display: block;
+  opacity: 0.5;
+  border: 10;
+  right: 10;
+  bottom: 10;
+  position: fixed;
+  background-color: #a4c639;
+}
+
 @media screen and (max-width: 1080px) {
   .card_product{
     width: 30%;
